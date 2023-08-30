@@ -16,13 +16,13 @@ function Home({
   const [teach, setTeach] = useState([]);
   const [isloading, setIsloading] = useState(false);
 
-  const [fromd, setFromd] = useState(2019);
+  const [fromd, setFromd] = useState(19);
   const [tod, setTod] = useState(2023);
 
   const getteachdata = async (name) => {
-    const url = `${
-      import.meta.env.VITE_REACT_APP_PROF
-    }?year=${fromd}&sec=${name}`;
+    const url = `${import.meta.env.VITE_REACT_APP_PROF}?year=${
+      parseInt(2000) + parseInt(fromd)
+    }&sec=${name}`;
     console.log(url);
     const data = await axios.get(url);
     const d = data.data.data[0];
@@ -31,7 +31,7 @@ function Home({
   };
 
   useEffect(() => {
-    if (fromd >= 2019) {
+    if (fromd >= 19) {
       setTod(parseInt(fromd) + 4);
     }
   }, [fromd]);
@@ -67,7 +67,9 @@ function Home({
   const handleselecteach = async (e) => {
     e.preventDefault();
     setSelectTeach(e.target.value);
-    setAcademicyear(`${fromd}-${tod}`);
+    const ff = parseInt(2000) + parseInt(fromd);
+    const td = parseInt(2000) + parseInt(tod);
+    setAcademicyear(`${ff}-${td}`);
     setSubmit(false);
   };
   //console.log(sections)
@@ -103,14 +105,14 @@ function Home({
 
           <section className="flex flex-row justify-center items-center gap-4">
             <section>
-              <label htmlFor="from" className="label">
+              {/*    <label htmlFor="from" className="label">
                 <span className="label-text text-slate-300">From</span>
-              </label>
+              </label> */}
               <input
                 id="from"
                 type="number"
-                min="2019"
-                max="2022"
+                min="19"
+                max="21"
                 className="input input-boarded w-28 px-2 text-slate-900 dark:text-slate-100"
                 placeholder="eg.2020"
                 onChange={(e) => setFromd(e.target.value)}
@@ -119,7 +121,7 @@ function Home({
               />
             </section>
 
-            <section>
+            {/* <section>
               <label htmlFor="To" className="label">
                 <span className="label-text text-slate-300">To</span>
               </label>
@@ -134,7 +136,7 @@ function Home({
                 required
                 disabled
               />
-            </section>
+            </section> */}
           </section>
         </section>
 
